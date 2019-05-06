@@ -54,31 +54,25 @@ function loop(){
 
 Create a function that searches for a specific entry in a phonebook.
 
-INIT phonebook
-CREATE name inside phonebook
-CREATE phonenumber inside phonebook
+INIT phonebook with numbers inside
 INIT i to 0
-FOR the length of the phonebook is less than or equal to 100
-  INPUT the name inside phonebook
+FOR the length of the phonebook is less than i
+  IF number in phonebook = number we are searching for
+    PRINT "Found number ..."
 END FOR
-RETURN name
-
-var phonebook = [
-  {
-    name: "Katy"
-  },
-  {
-    phonenumber: 2816671666
-  }
-]
+PRING "Number not found."
 
 
-function search(){
-  for(i=0; i < phonebook.length; i++){
-    console.log(phonebook[i].name);
-  }
+var phonebook = [2816671666, 4696320000, 8002141111];
+
+
+function numberSearch(number) {
+    for(var i=0; i < phonebook.length; i++) {
+        if(phonebook[i] === number) {
+            console.log("Found number " + number + ".");
+        }
+    }
+    console.log("Number not found.");
 }
-
-search()
 
 Using the pseudocode you wrote for the previous question, implement it in any computer language of your choice.
