@@ -1,0 +1,55 @@
+1. What is the main difference between a stack and a queue?
+
+The stack data structure arranges elements in LIFO priority. The queue data structure arranges elements in FIFO priority.
+
+2. What are the similarities between stacks and queues?
+
+The Stack and Queue both are the Non-primitive data structures.
+Stack and queue is linear data structures they both stores sequentially.
+Insertion and Deletion operation can be performed on Stack as well as in Queue.
+
+3. Imagine you are an engineer tasked with implementing the UNDO and REDO options in a word processor such as Microsoft Word. Which data structure would you use for each option and why?
+
+I would use stack data structure because it implements a LIFO priority collection which is perfect for creating Undo and Redo buttons.
+
+PROGRAMMING QUESTIONS
+
+1. Given a string, reverse it using a stack. For example, the string "Bloc!" should be converted to "!colB".
+
+function reverse(original) {
+  var stack=[];
+  for(var i=0; i<original.length; i++) {
+    stack.push(original[i]);
+  }
+  var reversed='';
+  while(stack.length>0) {
+    reversed += stack.pop();
+  }
+  return reversed;
+}
+
+
+2.Implement the pop method of a stack using one queue. Make a FIFO data structure mirror the functionality of a LIFO data structure. Since the internal list is not the same as defined in the checkpoint, it may help to rewrite the pseudocode first.
+
+class Stack {
+    constructor(){
+     this.pop = function(queue){
+       var newQueue = [];
+       var itemToRemove = [];
+       
+       for(var i=0;i<queue.length; i++){
+         if(i==queue.length-1){
+           itemToRemove.push(queue[i]);
+         }else{
+           newQueue.push(queue[i]);
+         }
+       }
+       
+       return itemToRemove;   
+       
+     }
+   }
+}
+
+var stack = new Stack();
+console.log(stack.pop('Daria'))
