@@ -1,0 +1,207 @@
+1. What are some pros and cons of using linked lists instead of arrays?
+
+We dynamically instantiate every node in a linked list, so our list never contains empty placeholders. More importantly, each node is independent in memory, so the operating system may use any available memory location to store it. Node memory independence allows linked lists to easily grow to immense sizes.
+
+However, because each node may exist anywhere in physical memory, it can be inefficient to access an element within the list. Elements must be accessed in order, starting from the first node (the head). Meanwhile, with an array, elements are indexed and can be accessed immediately by stating the index of the element within the array.
+
+
+
+2. Come up with a real world example of a linked list.
+
+Music Play list uses linked list or browser history would be a good example as well.
+
+PROGRAMMING QUESTIONS
+
+1. The linked list push function should take a value, create a node, and add it to the end of a list. Below is pseudocode for a push function for a singly linked list. However, there is something wrong with it. Submit both an explanation of the bug and a functional implementation of the method.
+
+FUNCTION push(element)
+CREATE node
+SET node.value TO element
+SET node.next TO null
+
+IF the head node does not exist
+ THEN SET head to node
+ELSE
+ SET current to head
+ SET current.next to node
+END IF
+
+//The pseudocode was missing a while loop that pushes the currentNode to currentNode.next.
+
+function LinkedList() {
+    var length = 0;
+    var head = null;
+
+    var Node = function(element) {
+        this.element = element;
+        this.next = null;
+    }
+
+    this.length = function() {
+        return length;
+    }
+
+    this.head = function() {
+        return head;
+    }
+
+    this.push = function(element) {
+        var node = new Node(element);
+        if (head === null) {
+            head = node;
+        }
+        else {
+            var currentNode = head;
+            while (currentNode.next) {
+                currentNode = currentNode.next;
+            }
+            currentNode.next = node;
+        }
+        length++;
+    }
+}
+
+var newList = new LinkedList();
+newList.push(1);
+newList.push(2);
+newList.push(3);
+newList.push(4);
+console.log(newList.length());
+console.log(newList.head());
+
+2. Given an unsorted singly linked list, remove all duplicates from the linked list.
+
+function LinkedList(){
+  this.head= null;
+  this.length=0;
+}
+
+LinkedList.prototype.push = function(val){  
+    var node = {
+       value: val,
+       next: null
+    }
+  
+    if(!this.head){
+      this.head = node;  
+      this.length += 1;    
+      return node;
+    }
+    else{
+      current = this.head;
+      while(current.next){
+        current = current.next;
+      }
+      current.next = node;
+      this.length += 1;
+      return node;
+    }
+  }
+
+LinkedList.prototype.duplicate = function(){
+ if (!this.head || !this.head.next) {
+      console.log("no duplicates");
+      return;
+  }
+
+    var thisNode = this.head;
+    while (thisNode != null) {
+      var previousNode = thisNode;
+      var nextNode = thisNode.next;
+      while (nextNode != null) {
+        if (thisNode.value == nextNode.value) {
+          previousNode.next = nextNode.next;
+          this.length --;
+        } else {
+          previousNode = nextNode;
+        }
+        nextNode = nextNode.next;
+      }
+      thisNode = thisNode.next;
+    }
+    return this;
+  }
+
+var list= new LinkedList()
+list.push(5);
+list.push(4);
+list.push(1);
+list.push(1);
+list.duplicate()
+
+
+3. Given an unsorted singly linked list, reverse it.
+
+function LinkedList(){
+  this.head= null;
+  this.length=0;
+}
+
+LinkedList.prototype.push = function(val){  
+    var node = {
+       value: val,
+       next: null
+    }
+  
+    if(!this.head){
+      this.head = node;  
+      this.length += 1;    
+      return node;
+    }
+    else{
+      current = this.head;
+      while(current.next){
+        current = current.next;
+      }
+      current.next = node;
+      this.length += 1;
+      return node;
+    }
+  }
+
+LinkedList.prototype.duplicate = function(){
+ if (!this.head || !this.head.next) {
+      console.log("no duplicates");
+  }
+
+    var thisNode = this.head;
+    while (thisNode != null) {
+      var previousNode = thisNode;
+      var nextNode = thisNode.next;
+      while (nextNode != null) {
+        if (thisNode.value == nextNode.value) {
+          previousNode.next = nextNode.next;
+          this.length --;
+        } else {
+          previousNode = nextNode;
+        }
+        nextNode = nextNode.next;
+      }
+      thisNode = thisNode.next;
+    }
+    return this;
+  }
+
+LinkedList.prototype.reverse= function() {
+    var previousNode = null;
+    var thisNode = this.head;
+    var nextNode;
+
+    while (thisNode) {
+      nextNode = thisNode.next;
+      thisNode.next = previousNode;
+      previousNode = thisNode;
+      thisNode = nextNode;
+    }
+
+    this.head = previousNode;
+  }
+
+
+   
+list= new LinkedList()
+list.push(5);
+list.push(3);
+list.push(1);
+list.push(4);
+list.reverse()
