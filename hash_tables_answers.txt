@@ -1,0 +1,91 @@
+What is a hash table?
+
+Hash table is a type of data structure that stores each value by linking it to a key, forming key-value pairs.
+
+What is hashing?
+
+Hashing is a process of converting arbitrary data into a fixed-length hash code using a hashing function.
+
+How does a hash table store data?
+
+Hash tables, like arrays, are intended to be used as collections of similar data. They are commonly used to store data by some form of identifier.
+
+How are hash tables and objects different?
+
+Hash tables are used to store different instances of data by some form of identifier. 
+Objects hold potentially different types of data bundled together. Each piece of data is tied to a property name, and that property determines the type of data. 
+
+Determine whether you would use a hash table or an object to store each of the following pieces of data:
+
+A list of pets and their unique names. - Hash Table
+The name, age, and the birthday of your best friend. - Object
+The name and location of every company in a given city. - Hash table
+All of the books checked out from a library by a particular individual. - Hash table
+The primary and secondary phone numbers for a contact. - Object
+
+CODING QUESTIOINS
+
+
+1. Create a hash table that allows a sales associate to enter a customer's name, address, and phone number into the system and look up customers using their phone numbers.
+
+class Customer {
+   constructor(name, address, phoneNumber) {
+      this.name = name;
+      this.address = address;
+      this.phoneNumber = phoneNumber;
+   }
+
+	getHash() {
+		return parseInt(this.phoneNumber);
+	}
+}
+
+let customerList = [];
+
+let kendall = new Customer('Kendall', 'Broomfield', '2391112233');
+
+let daria = new Customer('Daria', 'Broomfield', '2392223456');
+
+2. Create a hash table that allows a store owner to track their store's inventory and quantity.
+
+class Inventory {
+	constructor(item, count, serial) {
+		this.item = item;
+		this.count = count;
+		this.serial = serial;
+	}
+
+	getHash() {
+		return parseInt(this.serial);
+	}
+}
+
+let inventoryList = [];
+
+let table = new Inventory('Table', '4', '38011345680');
+
+inventoryList[table.getHash()] = table;
+
+
+3. Create a hash table that allows digital copies of newspapers to be entered and searched by publisher and publication date.
+
+
+class Articles { 
+	constructor(copy, publisher, pubDate) {
+		this.copy = copy;
+		this.publisher = publisher;
+		this.pubDate = pubDate;
+	}
+
+	getHash() {
+		return this.pubDate + ' ' + this.publisher;
+	}
+}
+
+let compiledArticles = {};
+
+let newArticle = new Articles('Global Warming and Coral Reefs', 'National Geographic', '06-15-2018');
+
+compiledArticles[newArticle.getHash()] = newArticle;
+
+console.log(compiledArticles)
