@@ -1,0 +1,53 @@
+1. Using proper pseudo-code, describe the following primitive algorithms:
+
+Making coffee;
+
+PROGRAM MakeCoffee:
+    Add coffee in coffee machine;
+    Add water to coffee machine;
+    Start coffee machine;
+    Pour coffee into cup;
+    IF ( sugar is required )
+        THEN Add two sugars;
+        ELSE don’t add two sugars;
+    ENDIF
+    Add two creams;
+    Serve;
+END
+
+Washing dishes;
+
+PROGRAM WashDishes:
+    REPEAT
+      Pick up a dirty plate;
+      Rinse dirty plate off;
+      Put plate into the dishwasher;
+    UNTIL all the dishes are in dishwasher;
+    Put soap in the dishwasher;
+    Press start button;
+    Wait till the dishes are clean;
+    Put clean dishes into kitchen cabinet;
+END
+
+Making sandwich:
+
+PROGRAM MakeSandwich:
+    Move a loaf of bread on a cutting board;
+    Cut a slice of bread with a knife;
+    Put slice of bread into toaster;
+    Turn toaster on;
+    Wait for the toaster to finish;
+    Move the toasted bread on a plate;
+    Spread butter on the toast with a knife;
+END
+
+
+2. As with the knot algorithm, there may be more than one way to solve the problem. It is essential to try to pick the best algorithm for a situation. Name three companies who created an algorithm that made them successful, e.g., Google's search algorithm. It doesn't need to be a tech example (such as a recipe or manufacturing a product). Google's algorithm produces more relevant results than other search engines; what about each of your cases make them stand out?
+
+YouTube algorithm is very effective at tracking what a certain person likes watching and based on that it suggested related videos.
+Facebook advertisement algorithm that suggests adds based on the user intarction and interests online.
+PayPal developed an algorithm that lets you securely shop online without entering your card information.
+
+3. Hypothesize about what constitutes an efficient algorithm versus an inefficient algorithm.
+
+A good algorithm should produce the correct outputs for any set of legal inputs. A good algorithm should execute efficiently with the fewest number of steps as possible. A good algorithm should be designed in such a way that others will be able to understand it and modify it to specify solutions to additional problems.
