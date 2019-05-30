@@ -31,25 +31,36 @@ function reverse(original) {
 
 2.Implement the pop method of a stack using one queue. Make a FIFO data structure mirror the functionality of a LIFO data structure. Since the internal list is not the same as defined in the checkpoint, it may help to rewrite the pseudocode first.
 
-class Stack {
-    constructor(){
-     this.pop = function(queue){
-       var newQueue = [];
-       var itemToRemove = [];
-       
-       for(var i=0;i<queue.length; i++){
-         if(i==queue.length-1){
-           itemToRemove.push(queue[i]);
-         }else{
-           newQueue.push(queue[i]);
-         }
-       }
-       
-       return itemToRemove;   
-       
-     }
-   }
+const Queue = function() {
+  this.storage = {};
+  this.count = 0;
 }
+  Queue.prototype.enqueue = function (value) {
+    if (value) {
+      this.storage[this.count] = value
+      this.count++
+    }
+  }
 
-var stack = new Stack();
-console.log(stack.pop('Daria'))
+  Queue.prototype.pop = function() {
+    if (this.count === 0) {
+      return undefined
+    }
+
+    this.count--
+    let result = this.storage[this.count]
+    delete this.storage[this.count]
+    return result
+  }
+
+  Queue.prototype.size = function() {
+    return this.count
+  }
+  
+
+
+let newQueue = new Queue()
+newQueue.enqueue("push")
+newQueue.enqueue("pop")
+newQueue.enqueue("delete")
+newQueue.pop()
