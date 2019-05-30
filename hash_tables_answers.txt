@@ -28,64 +28,175 @@ CODING QUESTIOINS
 
 1. Create a hash table that allows a sales associate to enter a customer's name, address, and phone number into the system and look up customers using their phone numbers.
 
-class Customer {
-   constructor(name, address, phoneNumber) {
-      this.name = name;
-      this.address = address;
-      this.phoneNumber = phoneNumber;
-   }
+var hash = (string, max) => {
+  var hash = 0;
+  for (var i = 0; i < string.length; i++) {
+    hash += string.charCodeAt(i);
+  }
+  return hash % max;
+};
 
-	getHash() {
-		return parseInt(this.phoneNumber);
-	}
-}
+let HashTable = function() {
 
-let customerList = [];
+  let storage = [];
+  const storageLimit = 100;
 
-let kendall = new Customer('Kendall', 'Broomfield', '2391112233');
+  this.add = function(key,value) {
+    var index = hash(key, storageLimit);
+    if (storage[index] === undefined) {
+      storage[index] = [
+        [key,value]
+      ];
+    } else {
+      var inserted = false;
+      for (var i = 0; i < storage[index].length; i++) {
+        if (storage[index][i][0] === key) {
+          storage[index][i][1] = value;
+          inserted = true;
+        }
+      }
+      if (inserted === false) {
+        storage[index].push([key,value]);
+      }
+    }
+  };
 
-let daria = new Customer('Daria', 'Broomfield', '2392223456');
+  this.lookup = function(key) {
+    var index = hash(key, storageLimit);
+    if (storage[index] === undefined) {
+      return undefined;
+    } else {
+      for (var i = 0; i < storage[index].length; i++) {
+        if (storage[index][i][0] === key) {
+          return storage[index][i][1];
+        }
+      }
+    }
+  };
+
+};
+
+var ht = new HashTable();
+ht.add(99999,{name:'Ronald', address:' 1000 Greenland St.'})
+ht.add(1000,{name:'John',address:'200 Toronto Ave.'});
+ht.add(5000,{name:'Mike',address:'354 Gerard St.'});
+
+console.log(ht.lookup(99999));
+console.log(ht.lookup(5000));
+console.log(ht.lookup(1000));
+
 
 2. Create a hash table that allows a store owner to track their store's inventory and quantity.
 
-class Inventory {
-	constructor(item, count, serial) {
-		this.item = item;
-		this.count = count;
-		this.serial = serial;
-	}
+var hash = (string,max) =>{
+  var hash= 0
+  for(var i=0; i<string.length;i++){
+    hash += string.charCodeAt(i)
+  }
+  return hash % max;
+};
 
-	getHash() {
-		return parseInt(this.serial);
-	}
-}
+let HashTable = function(){
+ let storage = [];
+ const storageLimit= 5;
 
-let inventoryList = [];
 
-let table = new Inventory('Table', '4', '38011345680');
+ this.add = function(key, value) {
+    var index = hash(key, storageLimit);
+    if (storage[index] === undefined) {
+      storage[index] = [
+        [key, value]
+      ];
+    } else {
+      var inserted = false;
+      for (var i = 0; i < storage[index].length; i++) {
+        if (storage[index][i][0] === key) {
+          storage[index][i][1] = value;
+          inserted = true;
+        }
+      }
+      if (inserted === false) {
+        storage[index].push([key, value]);
+      }
+    }
+  };
+  
+  this.search = function(key) {
+    var index = hash(key, storageLimit);
+    if (storage[index] === undefined) {
+      return undefined;
+    } else {
+      for (var i = 0; i < storage[index].length; i++) {
+        if (storage[index][i][0] === key) {
+          return storage[index][i][1];
+        }
+      }
+    }
+  };
 
-inventoryList[table.getHash()] = table;
+};
+
+var ht = new HashTable();
+ht.add('Fiction books',1000);
+ht.add('Horror books',500);
+ht.add('Comic books', 300);
+ht.add('Romance',210);
+
+ht.search('Romance')
 
 
 3. Create a hash table that allows digital copies of newspapers to be entered and searched by publisher and publication date.
 
 
-class Articles { 
-	constructor(copy, publisher, pubDate) {
-		this.copy = copy;
-		this.publisher = publisher;
-		this.pubDate = pubDate;
-	}
-
-	getHash() {
-		return this.pubDate + ' ' + this.publisher;
-	}
+let hash = (string, max)=> {
+  var hash = 0;
+  for(var i=0; i< string.length;i++){
+    hash+= string.charCodeAt(i);
+  }
+  return hash % max;
 }
 
-let compiledArticles = {};
+class Newspaper {
+  constructor() {
+    this.storage = [];
+    this.storageLimit = 60;
+  }
 
-let newArticle = new Articles('Global Warming and Coral Reefs', 'National Geographic', '06-15-2018');
+  add(publisher, pubDate) {
+    let key = publisher + pubDate;
+    let index = hash(key, this.storageLimit);
+    let data = [publisher, pubDate];
+      if (this.storage[index] === undefined) {
+        this.storage[index] = [ ];
+    } 
+    this.storage[index].push(data);
+    }
 
-compiledArticles[newArticle.getHash()] = newArticle;
+  search(publisher, pubDate) {
+    let key = publisher + pubDate;
+    let index = hash(key, this.storageLimit);
+    let result = [];
+    
+    if (!this.storage[index]) { return 'No results were found for this search' }
+      this.storage[index].forEach(entry => {
+       if (entry[0] === publisher && entry[1] === pubDate) { 
+        result.push(entry); 
+      }
+    })
+    return result;
+  }
+}
 
-console.log(compiledArticles)
+
+let news = new Newspaper();
+news.add('Pragmatic Bookshelf', '2009');
+news.add('St.Martins', '1990');
+news.add('St.Martin','2008');
+news.add('Pragmatic Publications', '2006');
+news.add('Oxford', '2018');
+
+console.log(news.search('Pragmatic Bookshelf', '2009'));
+console.log(news.search('St.Martins', '1990'));
+console.log(news.search('Pragmatic Bookshelf', '2009'));
+console.log(news.search('Pragmatic Publications', '2006'));
+console.log(news.search('humma'))
