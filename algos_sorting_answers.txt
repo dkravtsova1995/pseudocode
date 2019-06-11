@@ -1,0 +1,70 @@
+1. Implement a solution for bubble sort.
+
+
+var collection = [33, 103, 3, 726, 200, 984, 198, 764, 9];
+
+function bubbleSort(collection) {
+    var swapped;
+    do {
+        swapped = false;
+        for (var i=0; i < collection.length-1; i++) {
+            if (collection[i] > collection[i+1]) {
+                var temp = collection[i];
+                collection[i] = collection[i+1];
+                collection[i+1] = temp;
+                swapped = true;
+            }
+        }
+    } while (swapped);
+}
+
+bubbleSort(collection);
+console.log(collection);
+
+
+
+
+2. Write pseudocode for quicksort.
+
+FUNCTION quickSort(collection)
+    IF collection length <=1
+        RETURN collection
+    ELSE
+        SET left, right to empty arrays
+        SET pivot to last item in collection
+        SET length to length of collection
+
+        FOR i = 0 to length -1
+            IF collection[i] <= pivot
+                PUSH collection[i] to last index of left
+            ELSE
+                PUSH collection[i] to last index of right
+            END IF
+        END FOR
+        RETURN quickSort(left).concat(pivot, quickSort(right));
+    END IF
+END FUNCTION
+
+
+
+
+3. We talked about time complexity in a previous checkpoint, and how to get an idea of the efficiency of an algorithm. After looking at the pseudocode for the above sorting methods, identify why merge sort and quick sort are much more efficient than the others. Walking through each algorithm with a few sample collections may help.
+
+QUICK SORT - 0(n log n):
+-In quick sort you are only looping through the full array once then using divide and conquer to sort through the remaining data. Time complexity gets smaller for each recursive call.
+
+MERGE SORT - 0(n log n):
+-Merge sort uses similar divide and conquer process. The algorithm doesn't need to iterate through the whole collection multiple times because items are sorted in smaller groupings before sorted in the entire collection.
+
+Efficiency compared to other sorting algorithms:
+Bubble sort - 0(n^2)
+Selection sort - 0(n^2)
+
+
+
+
+4. All of the sorts addressed in this checkpoint are known as comparison sorts. Research bucket sort and explain how it works. What is the ideal input for bucket sort?
+
+Bucket Sort is a sorting algorithm, which is commonly used in computer science. Bucket Sort works by distributing the elements of an array into a number of buckets. Each bucket is then sorted individually, either using a different sorting algorithm, or by recursively applying the bucket sorting algorithm. Bucket sort is mainly useful when input is uniformly distributed over a range.
+
+ 
